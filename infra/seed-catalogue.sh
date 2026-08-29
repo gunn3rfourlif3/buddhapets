@@ -1,7 +1,7 @@
 #!/bin/bash
 # Seed the designed BuddhaPets catalogue into WooCommerce.
 #
-# These are the 12 products from apps/web/lib/content.ts — the catalogue the
+# These are the 14 products from apps/web/lib/content.ts — the catalogue the
 # site was designed and priced against. They are PLACEHOLDERS: real SKUs,
 # supplier images and true costs come from CJdropshipping later. Seeding them
 # now means the storefront has something real to read over the REST API.
@@ -14,7 +14,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-wp() { docker compose run --rm -T wpcli "$@"; }
+wp() { docker compose run --rm -T wpcli wp "$@" </dev/null; }
 
 echo "→ Checking WooCommerce is active…"
 wp plugin is-active woocommerce >/dev/null || {
@@ -46,7 +46,7 @@ seed_cat together     "Together"
 # --- Products ----------------------------------------------------------------
 echo "→ Products"
 
-while IFS='|' read -r slug name price cat short long; do
+while IFS='|' read -r slug name price cat short long <&3; do
   [ -z "${slug:-}" ] && continue
 
   existing=$(wp post list --post_type=product --name="$slug" --field=ID 2>/dev/null | tr -d '\r' | head -1)
@@ -69,13 +69,15 @@ while IFS='|' read -r slug name price cat short long; do
         --porcelain | tr -d '\r')
 
   echo "  created $name (#$id) \$$price"
-done <<'ROWS'
+done 3<<'ROWS'
 cloud-nine-donut-bed|Cloud Nine Donut Bed|49|calm-comfort|Deep-pressure comfort for thunder-night sleepers.|A raised rim to rest a chin on and a sunken middle that holds a curled body — the shape does the reassuring. Machine washable, because the good beds are the ones that get used.
 quiet-hours-cave-bed|Quiet Hours Cave Bed|55|calm-comfort|An enclosed den for pets who like to disappear.|A hooded bed for the ones who take themselves under the duvet. The canopy cuts light and softens sound, which matters more than most people expect during fireworks season.
 steady-hold-calming-vest|Steady Hold Calming Vest|39|calm-comfort|Gentle constant pressure, like a long hug.|Adjustable wrap that applies light, even pressure across the chest and flank. Put it on before the trigger, not during — it works best as part of a routine.
+second-heartbeat-plush|Second Heartbeat Plush|34|calm-comfort|A pulse to sleep against, for the ones who miss their litter.|A soft companion with a gentle battery-powered pulse and a warmable insert. Puppies and newly adopted pets settle faster with something that breathes beside them — it is the closest a first night alone gets to not being alone.
 forage-and-flow-snuffle-mat|Forage & Flow Snuffle Mat|29|slow-living|Turns dinner into a calming 20-minute treasure hunt.|Dense fabric fronds hide kibble so a meal becomes nose work. The single cheapest change most people can make to an anxious dog's day, and the effect usually shows inside a week.
 still-water-lick-mat|Still Water Lick Mat|19|slow-living|Licking lowers arousal — this makes it last.|A textured mat for wet food, yoghurt or peanut butter. Repetitive licking is genuinely self-soothing, which makes this the easiest last task before bed.
 meander-slow-feeder-bowl|Meander Slow Feeder Bowl|24|slow-living|For the ones who inhale dinner.|A maze-bottomed bowl that stretches a ninety-second meal into something closer to ten minutes. Gulping is arousal, not greed — slowing it down settles the mood as well as the stomach.
+long-hours-stuffable-chew|Long Hours Stuffable Chew|22|slow-living|Stuff it, freeze it, hand it over as you leave.|A hollow natural-rubber chew that holds wet food, yoghurt or peanut butter. Frozen, it turns the first anxious twenty minutes of being alone into a long, absorbing job — which is exactly the window that matters.
 lotus-whisper-fountain|Lotus Whisper Fountain|59|zen-home|A trickling water garden that keeps cats hydrated.|Ceramic, near-silent, and filtered. Moving water encourages steady drinking, and in cats hydration and calm track together more closely than people expect.
 stoneware-calm-bowl-set|Stoneware Calm Bowl Set|44|zen-home|Weighted ceramic that doesn't skid or clatter.|A heavy base means no chasing the bowl across the kitchen — less noise, less frustration, a quieter mealtime for everyone.
 enso-garden-scratcher|Enso Garden Scratcher|46|zen-home|A scratching post you won't want to hide.|Recycled cardboard in a raked-sand pattern, on a solid base. Cats need to scratch; this gives them somewhere better than the sofa arm and looks like an object you chose.

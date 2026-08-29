@@ -71,7 +71,7 @@ services:
       retries: 6
 
   # WP-CLI against the same files and database. Run it, don't leave it running:
-  #   docker compose run --rm wpcli plugin list
+  #   docker compose run --rm wpcli wp plugin list
   wpcli:
     image: wordpress:cli-php8.3
     user: "33:33"                    # www-data, so file ownership stays correct

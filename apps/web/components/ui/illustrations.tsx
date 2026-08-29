@@ -439,6 +439,76 @@ export function BowlSet({ className }: Props) {
   );
 }
 
+/** A plush companion with a pulsing heart — the littermate stand-in. */
+export function HeartbeatPlush({ className }: Props) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} role="img" aria-label="A soft plush toy with a heartbeat marker on its chest">
+      <ellipse cx="100" cy="138" rx="54" ry="9" fill={fill.violet} opacity="0.14" />
+
+      {/* body */}
+      <path d="M64 108c0-22 16-38 36-38s36 16 36 38c0 18-14 28-36 28s-36-10-36-28Z" fill="#e8dfc6" />
+      {/* head */}
+      <ellipse cx="100" cy="66" rx="30" ry="27" fill="#f0e9d6" />
+      {/* ears, drooping */}
+      <path d="M74 52c-10-2-17 5-17 16 0 12 8 20 16 20 4 0 7-4 7-10Z" fill="#d8caa8" />
+      <path d="M126 52c10-2 17 5 17 16 0 12-8 20-16 20-4 0-7-4-7-10Z" fill="#d8caa8" />
+      {/* muzzle + closed eyes */}
+      <ellipse cx="100" cy="76" rx="13" ry="9" fill="#e0d4b6" />
+      <ellipse cx="100" cy="70" rx="4" ry="3.2" fill={fill.ink} />
+      <path d="M82 62c3-3 8-3 11 0" fill="none" stroke={fill.ink} strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M107 62c3-3 8-3 11 0" fill="none" stroke={fill.ink} strokeWidth="2.4" strokeLinecap="round" />
+      {/* paws */}
+      <ellipse cx="80" cy="130" rx="12" ry="8" fill="#f0e9d6" />
+      <ellipse cx="120" cy="130" rx="12" ry="8" fill="#f0e9d6" />
+
+      {/* heartbeat patch on the chest */}
+      <circle cx="100" cy="108" r="19" fill={fill.roseSoft} />
+      <path
+        d="M100 118c-8-6-13-10-13-16a6.5 6.5 0 0 1 13-3 6.5 6.5 0 0 1 13 3c0 6-5 10-13 16Z"
+        fill={fill.rose}
+      />
+      {/* pulse line */}
+      <path d="M74 108h8l4-7 5 14 4-7h4" fill="none" stroke={fill.rose} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.85" />
+    </svg>
+  );
+}
+
+/** A hollow chew that can be stuffed and frozen. */
+export function StuffableChew({ className }: Props) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} role="img" aria-label="A hollow rubber chew toy stuffed with treats">
+      <ellipse cx="100" cy="136" rx="50" ry="10" fill={fill.violet} opacity="0.14" />
+
+      {/* body: a broad, squat bell — deliberately generic */}
+      <path
+        d="M100 40c-11 0-19 6-21 16-16 10-27 27-27 45 0 15 21 25 48 25s48-10 48-25c0-18-11-35-27-45-2-10-10-16-21-16Z"
+        fill="#b5544f"
+      />
+      {/* left highlight */}
+      <path
+        d="M78 68c-11 11-17 24-17 35 0 6 2 11 6 15-8-6-13-14-13-24 0-11 8-22 24-26Z"
+        fill="#c97b74" opacity="0.9"
+      />
+      {/* rubber grooves */}
+      <path d="M64 94c11 5 24 7 36 7s25-2 36-7" fill="none" stroke="#95403d" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M60 110c12 6 26 8 40 8s28-2 40-8" fill="none" stroke="#95403d" strokeWidth="3" strokeLinecap="round" opacity="0.65" />
+
+      {/* opening at the top */}
+      <ellipse cx="100" cy="48" rx="14" ry="8" fill="#8c3b38" />
+      <ellipse cx="100" cy="47" rx="9" ry="5" fill="#5e2624" />
+
+      {/* stuffing peeking out */}
+      <path d="M91 45c3-6 15-6 18 0-3 5-15 5-18 0Z" fill="#f0e0c0" />
+      <circle cx="95" cy="41" r="3.2" fill="#e8cfa2" />
+      <circle cx="105" cy="42" r="2.6" fill="#e8cfa2" />
+
+      {/* frost marks — it is meant to be frozen */}
+      <path d="M150 74v10M145 77l10 4M155 77l-10 4" stroke="#cfe6f2" strokeWidth="2" strokeLinecap="round" opacity="0.95" />
+      <path d="M46 98v7M42.5 100l7 3M49.5 100l-7 3" stroke="#cfe6f2" strokeWidth="1.8" strokeLinecap="round" opacity="0.8" />
+    </svg>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /* Journal                                                                     */
 /* -------------------------------------------------------------------------- */
@@ -537,6 +607,8 @@ export const artByKey: Record<string, (p: Props) => React.ReactElement> = {
   "starter-kit": StarterKit,
   fountain: Fountain,
   "bowl-set": BowlSet,
+  heartbeat: HeartbeatPlush,
+  "stuffable-chew": StuffableChew,
   chews: Chews,
   vest: CalmingVest,
   "lick-mat": LickMat,

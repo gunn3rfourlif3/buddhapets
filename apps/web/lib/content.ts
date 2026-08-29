@@ -25,7 +25,9 @@ export type ArtKey =
   | "bowl-set"
   | "chews"
   | "vest"
-  | "lick-mat";
+  | "lick-mat"
+  | "heartbeat"
+  | "stuffable-chew";
 
 /** The slot a product fills in a ritual — drives the Ritual Builder. */
 export type RitualRole = "comfort" | "enrichment" | "finishing";
@@ -137,6 +139,20 @@ export const products: Product[] = [
     delivery: "5–10 business days · ships from the EU",
   },
 
+  {
+    slug: "second-heartbeat-plush",
+    name: "Second Heartbeat Plush",
+    price: 34,
+    blurb: "A pulse to sleep against, for the ones who miss their litter.",
+    description:
+      "A soft companion with a gentle battery-powered pulse and a warmable insert. Puppies and newly adopted pets settle faster with something that breathes beside them — it is the closest a first night alone gets to not being alone.",
+    collection: "calm-comfort",
+    role: "comfort",
+    art: "heartbeat",
+    tile: "peach",
+    delivery: "3–7 business days · ships from the US",
+  },
+
   // --- Slow Living ---
   {
     slug: "forage-and-flow-snuffle-mat",
@@ -176,6 +192,20 @@ export const products: Product[] = [
     role: "enrichment",
     art: "slow-feeder",
     tile: "peach",
+    delivery: "3–7 business days · ships from the US",
+  },
+
+  {
+    slug: "long-hours-stuffable-chew",
+    name: "Long Hours Stuffable Chew",
+    price: 22,
+    blurb: "Stuff it, freeze it, hand it over as you leave.",
+    description:
+      "A hollow natural-rubber chew that holds wet food, yoghurt or peanut butter. Frozen, it turns the first anxious twenty minutes of being alone into a long, absorbing job — which is exactly the window that matters.",
+    collection: "slow-living",
+    role: "enrichment",
+    art: "stuffable-chew",
+    tile: "sky",
     delivery: "3–7 business days · ships from the US",
   },
 

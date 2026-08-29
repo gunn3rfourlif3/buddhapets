@@ -95,7 +95,7 @@ From the internet it is unreachable, which is the point.
 ## 4. Install WordPress and WooCommerce
 
 ```bash
-alias dc-wp='docker compose run --rm wpcli'
+alias dc-wp='docker compose run --rm wpcli wp'
 
 dc-wp core install \
   --url=http://localhost:8080 \
@@ -230,7 +230,7 @@ cd ~/buddhapets/infra
 sed -i 's|^SITE_URL=.*|SITE_URL=https://cms.buddhapets.co.za|' .env
 docker compose up -d                 # recreates with the new SITE_URL
 
-docker compose run --rm wpcli search-replace \
+docker compose run --rm wpcli wp search-replace \
   'http://localhost:8080' 'https://cms.buddhapets.co.za' --all-tables --report-changes-only
 ```
 
@@ -296,7 +296,7 @@ docker compose ps
 docker compose logs -f wordpress
 docker compose restart wordpress
 docker compose pull && docker compose up -d
-docker compose run --rm wpcli plugin update --all
+docker compose run --rm wpcli wp plugin update --all
 ```
 
 To remove only this stack, ever:

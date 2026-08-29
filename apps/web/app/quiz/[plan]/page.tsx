@@ -5,6 +5,7 @@ import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { RitualDiary } from "@/components/rituals/RitualDiary";
 import { Figure } from "@/components/ui/Figure";
 import { artByKey } from "@/components/ui/illustrations";
 import { Enso, Shield } from "@/components/ui/icons";
@@ -125,6 +126,8 @@ export default async function ZenPlanPage({
             </ol>
           </div>
         </section>
+
+        <RitualDiary planSlug={plan.slug} planName={plan.name} steps={plan.steps} />
 
         {/* What supports it */}
         <section className="mx-auto flex max-w-[1440px] flex-col gap-12 px-6 py-section lg:px-gutter">
