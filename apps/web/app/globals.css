@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   BuddhaPets design tokens — the single source of truth.
+   Mirrors the "BuddhaPets Brand" canvas (premium variant, Aug 2026).
+   Every value here is available as a Tailwind utility, e.g.
+   bg-violet, text-ink, rounded-card, shadow-soft, font-display.
+   ========================================================================== */
+@theme {
+  /* --- Brand core --- */
+  --color-violet: #5b4397;        /* primary actions, italic accents */
+  --color-violet-deep: #48347a;   /* hover */
+  --color-violet-soft: #8a72c2;
+  --color-violet-mist: #c9bfe6;
+
+  --color-rose: #de5493;          /* accent, badges, primary CTA on dark */
+  --color-rose-deep: #c94480;     /* eyebrow text */
+  --color-rose-light: #e884b2;    /* accents on midnight */
+  --color-blush: #fae4ee;         /* eyebrow pill fill */
+
+  --color-champagne: #c9a24b;     /* stars, guarantee, hairline flourishes */
+  --color-champagne-light: #e8c778;
+
+  /* --- Neutrals (violet-biased, never pure grey) --- */
+  --color-ink: #2e2153;           /* headings */
+  --color-midnight: #191036;      /* footer, hero ground */
+  --color-body: #6b6580;          /* body copy */
+  --color-muted: #9a94ac;         /* captions */
+  --color-faint: #beb8cf;         /* meta, disabled */
+
+  --color-ivory: #fcfbf9;         /* page ground — warm, never stark white */
+  --color-mist: #f4f2f8;          /* alternating sections */
+  --color-line: #efedf5;          /* hairline borders */
+  --color-line-strong: #cdc3e6;   /* outline buttons */
+
+  /* --- Luxe pastels: photo & product tiles --- */
+  --color-tile-lemon: #f3e4b5;
+  --color-tile-sky: #bfd9e6;
+  --color-tile-mint: #c6e2d2;
+  --color-tile-rose: #f2cbdb;
+  --color-tile-lavender: #d8d2ee;
+  --color-tile-peach: #f0d8be;
+
+  /* Ink colours that sit legibly on each pastel tile */
+  --color-tile-lemon-ink: #7c6614;
+  --color-tile-sky-ink: #1f5c7a;
+  --color-tile-mint-ink: #2a6b48;
+  --color-tile-rose-ink: #8f3462;
+  --color-tile-lavender-ink: #4c3d85;
+  --color-tile-peach-ink: #8a5a20;
+
+  /* --- Type --- */
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+
+  /* --- Radii --- */
+  --radius-tile: 0.875rem;  /* 14px — photo tiles */
+  --radius-card: 1.25rem;   /* 20px — cards, panels */
+  --radius-band: 1.5rem;    /* 24px — full-width feature bands */
+
+  /* --- Shadows: violet-tinted, never grey --- */
+  --shadow-soft: 0 10px 30px rgb(46 33 83 / 0.07);
+  --shadow-lifted: 0 18px 44px rgb(46 33 83 / 0.14);
+  --shadow-violet: 0 8px 20px rgb(91 67 151 / 0.28);
+  --shadow-rose: 0 12px 30px rgb(222 84 147 / 0.4);
+
+  /* --- Section rhythm --- */
+  --spacing-section: 6.875rem;  /* 110px vertical padding */
+  --spacing-gutter: 6.25rem;    /* 100px horizontal gutter */
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Headlines carry the premium voice; italic marks the accent word. */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-blush);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  /* The house move: an italic serif accent word inside a headline. */
+  .accent {
+    font-style: italic;
+    color: var(--color-violet);
+  }
+
+  .accent-gold {
+    font-style: italic;
+    color: var(--color-champagne-light);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}

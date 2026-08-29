@@ -1,0 +1,46 @@
+// Quiz storage for the Calm Quiz → Zen Plan flow.
+// WooCommerce owns products, orders and customers; this database owns only
+// the personalization layer, keyed to a Woo customer once one exists.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model QuizResult {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Captured after the teaser result is shown, so completion stays high.
+  email     String?
+  petName   String?
+  petType   PetType  @default(DOG)
+
+  /// Raw answers keyed by question id — kept so scoring can be re-run
+  /// when the plan definitions change.
+  answers   Json
+
+  /// Computed 0–100 anxiety score and the plan it mapped to.
+  score     Int
+  planSlug  String
+  planName  String
+
+  /// Set once the lead becomes a WooCommerce customer.
+  wooCustomerId Int?
+
+  /// Set once the Brevo automation has been triggered for this result.
+  emailedAt DateTime?
+
+  @@index([email])
+  @@index([planSlug])
+}
+
+enum PetType {
+  DOG
+  CAT
+  BOTH
+}

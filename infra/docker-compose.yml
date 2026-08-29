@@ -1,0 +1,129 @@
+# BuddhaPets — WooCommerce engine.
+#
+# This box already runs three compose projects (deploy/PMS03, eternalguard,
+# zaaka-pi-auction). This stack is built to coexist with them:
+#
+#   * The only published port is bound to 127.0.0.1, so nothing is exposed to
+#     the internet and no firewall rule is needed.
+#   * MariaDB stays on this project's private network — not reachable from the
+#     network the other apps share.
+#   * The `edge` alias is ready for when buddhapets.co.za is registered: the
+#     existing Caddy can then proxy to `buddhapets-wp` with no changes here.
+#
+# Bring up:  docker compose up -d
+# See "Runbook - WooCommerce on Contabo.md".
+
+name: buddhapets
+
+services:
+  wordpress:
+    image: wordpress:6-php8.3-apache
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_NAME: buddhapets
+      WORDPRESS_DB_USER: buddhapets
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+      # SITE_URL carries the scheme, so the same config works for the localhost
+      # phase and the public phase. Behind a proxy WordPress can't see that the
+      # request was HTTPS; without the forwarded-proto handling below it
+      # redirect-loops on wp-admin and writes http:// URLs into the database.
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', '${SITE_URL}');
+        define('WP_SITEURL', '${SITE_URL}');
+        if (strpos('${SITE_URL}', 'https://') === 0) {
+          define('FORCE_SSL_ADMIN', true);
+        }
+        if (isset($$_SERVER['HTTP_X_FORWARDED_PROTO']) && $$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+          $$_SERVER['HTTPS'] = 'on';
+        }
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - wp_data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+    ports:
+      # Loopback only — reachable via SSH tunnel, never from the internet.
+      # Remove this line once the public vhost is live, if you prefer.
+      - "127.0.0.1:${WP_LOCAL_PORT:-8080}:80"
+    networks:
+      internal:
+      edge:
+        aliases: [buddhapets-wp]     # what the edge Caddy will proxy to later
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  mariadb:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: buddhapets
+      MARIADB_USER: buddhapets
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks: [internal]             # never joins the shared network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  # WP-CLI against the same files and database. Run it, don't leave it running:
+  #   docker compose run --rm wpcli plugin list
+  wpcli:
+    image: wordpress:cli-php8.3
+    user: "33:33"                    # www-data, so file ownership stays correct
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_NAME: buddhapets
+      WORDPRESS_DB_USER: buddhapets
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - wp_data:/var/www/html
+    networks: [internal]
+    depends_on: [mariadb]
+    profiles: ["cli"]                # never starts with a plain `up`
+
+  # --- Storefront: not needed until the Next.js app deploys ---
+
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: buddhapets_quiz
+      POSTGRES_USER: buddhapets
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [internal]
+    profiles: ["storefront"]
+
+  web:
+    build: ../apps/web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      WOO_URL: ${SITE_URL}
+      WOO_CONSUMER_KEY: ${WOO_CONSUMER_KEY}
+      WOO_CONSUMER_SECRET: ${WOO_CONSUMER_SECRET}
+      DATABASE_URL: postgresql://buddhapets:${POSTGRES_PASSWORD}@postgres:5432/buddhapets_quiz
+      NEXT_PUBLIC_SITE_URL: https://${DOMAIN}
+    networks:
+      internal:
+      edge:
+        aliases: [buddhapets-web]
+    depends_on: [postgres]
+    profiles: ["storefront"]
+
+networks:
+  internal:                          # private to this project
+  edge:
+    external: true
+    name: deploy_default             # the network the edge Caddy lives on
+
+volumes:
+  wp_data:
+  mariadb_data:
+  postgres_data:

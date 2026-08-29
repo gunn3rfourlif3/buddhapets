@@ -1,0 +1,40 @@
+# ── BuddhaPets ───────────────────────────────────────────────────────────
+# Append this to /home/deploy/PMS03/deploy/Caddyfile, then reload:
+#   docker exec deploy-caddy-1 caddy reload --config /etc/caddy/Caddyfile
+#
+# DNS: A record  cms.buddhapets.co.za  ->  169.58.46.223
+#      (and later  @ / www .buddhapets.co.za  ->  169.58.46.223)
+#
+# `buddhapets-wp` is the network alias set in the buddhapets compose project;
+# it resolves over deploy_default, the same network this Caddy is on.
+
+# WooCommerce engine + wp-admin (headless: the storefront reads its REST API)
+cms.buddhapets.co.za {
+	encode zstd gzip
+	reverse_proxy buddhapets-wp:80
+
+	# wp-admin, login and the REST API must never be cached anywhere upstream.
+	@dynamic path /wp-admin/* /wp-json/* /wp-login.php /wp-cron.php
+	header @dynamic Cache-Control "no-store"
+
+	# xmlrpc is the single most brute-forced endpoint in WordPress and this
+	# install has no use for it.
+	@xmlrpc path /xmlrpc.php
+	respond @xmlrpc 403
+}
+
+# Storefront (Next.js). Uncomment once the web service is deployed:
+#   cd ~/buddhapets/infra && docker compose --profile storefront up -d --build web
+#
+# buddhapets.co.za, www.buddhapets.co.za {
+# 	encode zstd gzip
+# 	@assets path /_next/static/* /images/*
+# 	handle @assets {
+# 		reverse_proxy buddhapets-web:3000
+# 	}
+# 	handle {
+# 		reverse_proxy buddhapets-web:3000 {
+# 			header_down Cache-Control "no-cache"
+# 		}
+# 	}
+# }
