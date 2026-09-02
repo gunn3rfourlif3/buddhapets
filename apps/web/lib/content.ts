@@ -352,6 +352,101 @@ export const faqs = [
   },
 ];
 
+
+/**
+ * The full FAQ, grouped. The four entries in `faqs` above are the ones shown
+ * on the home page; this is everything, for /faq.
+ *
+ * Anything in [brackets] needs a real policy decision before launch.
+ */
+export const faqGroups: { title: string; items: { q: string; a: string }[] }[] = [
+  {
+    title: "Orders & delivery",
+    items: [
+      {
+        q: "How fast is shipping?",
+        a: "Most orders ship from US or EU warehouses and arrive in 3–7 business days. A few pieces ship from further afield and take 5–10. Every product page shows its own estimate before you buy — we would rather tell you up front than apologise later.",
+      },
+      {
+        q: "Do you ship internationally?",
+        a: "Yes. Delivery windows and any customs charges vary by country; the estimate on each product page assumes a standard destination. [Confirm which countries you will ship to before launch.]",
+      },
+      {
+        q: "Can I track my order?",
+        a: "You'll get a tracking link by email as soon as your parcel leaves the warehouse. If tracking hasn't updated in a few days, that's usually normal in transit — but tell us and we'll chase it.",
+      },
+      {
+        q: "My order arrived in separate parcels — is that right?",
+        a: "Probably, yes. Items ship from the warehouse closest to stock, so a ritual set can arrive over a few days. Each parcel gets its own tracking link.",
+      },
+    ],
+  },
+  {
+    title: "The guarantee & returns",
+    items: [
+      {
+        q: "How does the 60-Day Happy Pet Guarantee work?",
+        a: "Try anything for sixty days. If your pet doesn't settle, email us and we'll make it right — a replacement, a different ritual, or your money back. You don't need to photograph a chewed bed to prove it.",
+      },
+      {
+        q: "What if something arrives damaged?",
+        a: "Send us a photo and we'll replace it. No return needed for damaged goods — posting a broken item back helps nobody.",
+      },
+      {
+        q: "Can I return something my pet simply didn't like?",
+        a: "That is exactly what the guarantee is for. Pets are individuals and no product suits every one of them.",
+      },
+    ],
+  },
+  {
+    title: "Products & suitability",
+    items: [
+      {
+        q: "Are ZenChews safe for every dog?",
+        a: "They use vet-approved, natural ingredients like hemp and L-theanine, with no sedatives. Check with your vet first for puppies, pregnant dogs, or any pet on medication — that's not boilerplate, there are real interactions worth knowing about.",
+      },
+      {
+        q: "Will a calming product fix my dog's anxiety?",
+        a: "On its own, usually not. What shifts things is a routine repeated consistently, with the right product supporting it. That's why every order points you at a ritual rather than just a box.",
+      },
+      {
+        q: "How do I choose a size?",
+        a: "Each product page lists dimensions. For beds, measure your pet nose-to-tail while they're stretched out and add roughly 15cm — most people buy a size too small.",
+      },
+    ],
+  },
+  {
+    title: "The Calm Quiz",
+    items: [
+      {
+        q: "What is a personalized Zen Plan?",
+        a: "It's the result of the Calm Quiz: a named ritual matched to your pet's stress signals, with the two or three products that support it. Not a generic list.",
+      },
+      {
+        q: "Do I have to give my email to see my result?",
+        a: "No. There's a skip option, and the plan shows either way. We ask because having it in your inbox is genuinely more useful on the night you need it.",
+      },
+      {
+        q: "Is my Ritual Diary stored on your servers?",
+        a: "No. Everything you log — notes, ticks, photos — stays in your own browser on your own device. Nothing is uploaded.",
+      },
+    ],
+  },
+  {
+    title: "Payment & account",
+    items: [
+      {
+        q: "How can I pay?",
+        a: "Card payments through Paystack and Payfast, both of which handle the card details directly — we never see or store them.",
+      },
+      {
+        q: "What currency are prices in?",
+        a: "Prices are shown in US dollars. Your bank converts at their rate, and may add a foreign transaction fee.",
+      },
+    ],
+  },
+];
+
 export const journal = [
   {
     slug: "five-evening-rituals-for-anxious-dogs",
