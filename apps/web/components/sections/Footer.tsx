@@ -63,7 +63,7 @@ export function Footer() {
             <div className="flex flex-col gap-2.5 text-[13px] text-[#f6f4fb]/60">
               <p>[Business address]</p>
               <p>[Phone / WhatsApp]</p>
-              <p>hello@buddhapets.com</p>
+              <p>hello@buddhapets.co.za</p>
             </div>
           </div>
 

@@ -108,13 +108,14 @@ services:
       WOO_URL: ${SITE_URL}
       WOO_CONSUMER_KEY: ${WOO_CONSUMER_KEY}
       WOO_CONSUMER_SECRET: ${WOO_CONSUMER_SECRET}
-      DATABASE_URL: postgresql://buddhapets:${POSTGRES_PASSWORD}@postgres:5432/buddhapets_quiz
+      # DATABASE_URL: uncomment together with the postgres service once
+      # `npm install prisma @prisma/client` and a migration have been run.
+      # postgresql://buddhapets:${POSTGRES_PASSWORD}@postgres:5432/buddhapets_quiz
       NEXT_PUBLIC_SITE_URL: https://${DOMAIN}
     networks:
       internal:
       edge:
         aliases: [buddhapets-web]
-    depends_on: [postgres]
     profiles: ["storefront"]
 
 networks:

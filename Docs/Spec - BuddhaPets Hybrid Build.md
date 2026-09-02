@@ -15,7 +15,7 @@
                                       |
                             Nginx reverse proxy + TLS
                      /                                \
-        buddhapets.com                        cms.buddhapets.com
+        buddhapets.co.za                        cms.buddhapets.co.za
         Next.js 15 (Node, pm2 or Docker)      WordPress + WooCommerce
         - Landing page (premium design)       - Product catalog & inventory
         - Catalog + product pages             - Orders, refunds, coupons

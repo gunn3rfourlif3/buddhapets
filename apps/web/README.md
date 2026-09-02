@@ -1,6 +1,6 @@
 # BuddhaPets — web
 
-The customer-facing frontend. WooCommerce (at `cms.buddhapets.com`) is the
+The customer-facing frontend. WooCommerce (at `cms.buddhapets.co.za`) is the
 commerce engine; this app is everything people actually see.
 
 ## Getting started

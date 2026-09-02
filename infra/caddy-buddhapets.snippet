@@ -23,18 +23,16 @@ cms.buddhapets.co.za {
 	respond @xmlrpc 403
 }
 
-# Storefront (Next.js). Uncomment once the web service is deployed:
-#   cd ~/buddhapets/infra && docker compose --profile storefront up -d --build web
-#
-# buddhapets.co.za, www.buddhapets.co.za {
-# 	encode zstd gzip
-# 	@assets path /_next/static/* /images/*
-# 	handle @assets {
-# 		reverse_proxy buddhapets-web:3000
-# 	}
-# 	handle {
-# 		reverse_proxy buddhapets-web:3000 {
-# 			header_down Cache-Control "no-cache"
-# 		}
-# 	}
-# }
+# Storefront (Next.js).
+buddhapets.co.za, www.buddhapets.co.za {
+	encode zstd gzip
+	@assets path /_next/static/* /images/*
+	handle @assets {
+		reverse_proxy buddhapets-web:3000
+	}
+	handle {
+		reverse_proxy buddhapets-web:3000 {
+			header_down Cache-Control "no-cache"
+		}
+	}
+}

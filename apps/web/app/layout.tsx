@@ -18,7 +18,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://buddhapets.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://buddhapets.co.za"),
   title: {
     default: "BuddhaPets — Calm pets, peaceful homes",
     template: "%s · BuddhaPets",
