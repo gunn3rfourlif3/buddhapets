@@ -74,6 +74,19 @@ function writeStored(key: string, value: string) {
   }
 }
 
+/**
+ * WordPress 301s every REST path that lacks a trailing slash — /cart becomes
+ * /cart/, /products?slug=x becomes /products/?slug=x. Harmless to curl, fatal
+ * in a browser: these calls carry a Nonce header, which makes them preflighted,
+ * and a preflighted request that redirects is aborted. So the slash goes in
+ * before the query string, always.
+ */
+function withTrailingSlash(path: string): string {
+  const [route, query] = path.split("?");
+  const normalised = route.endsWith("/") ? route : `${route}/`;
+  return query ? `${normalised}?${query}` : normalised;
+}
+
 export class StoreError extends Error {
   constructor(
     message: string,
@@ -97,7 +110,16 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
   let res: Response;
   try {
-    res = await fetch(`${STORE}${path}`, { ...init, headers, credentials: "include" });
+    res = await fetch(`${STORE}${withTrailingSlash(path)}`, {
+      ...init,
+      headers,
+      credentials: "include",
+      // A redirect would silently drop these headers and, on a preflighted
+      // request, be rejected by the browser outright. withTrailingSlash() should
+      // make this unreachable; "error" turns a regression into a loud failure
+      // instead of a cart that mysteriously empties itself.
+      redirect: "error",
+    });
   } catch {
     // Network-level failure: offline, DNS, or CORS refused the request outright.
     throw new StoreError("We couldn't reach the shop. Check your connection and try again.", 0);
