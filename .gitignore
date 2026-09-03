@@ -1,7 +1,9 @@
 node_modules/
 .next/
 out/
-build/
+# Anchored to the repo root on purpose: an unanchored `build/` also matches
+# app routes such as apps/web/app/rituals/build, silently dropping them.
+/build/
 .env
 .env.local
 *.log
