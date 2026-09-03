@@ -41,6 +41,9 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+      # Must-use plugins load before everything and cannot be deactivated from
+      # wp-admin, which is what we want for the CORS rules the storefront needs.
+      - ./wp-mu-plugins:/var/www/html/wp-content/mu-plugins:ro
     ports:
       # Loopback only — reachable via SSH tunnel, never from the internet.
       # Remove this line once the public vhost is live, if you prefer.
@@ -101,7 +104,13 @@ services:
     profiles: ["storefront"]
 
   web:
-    build: ../apps/web
+    build:
+      context: ../apps/web
+      # Baked into the browser bundle at build time — see apps/web/Dockerfile.
+      # Change either of these and the image must be rebuilt, not just restarted.
+      args:
+        NEXT_PUBLIC_CMS_URL: ${SITE_URL}
+        NEXT_PUBLIC_SITE_URL: https://${DOMAIN}
     restart: unless-stopped
     environment:
       NODE_ENV: production
@@ -112,6 +121,9 @@ services:
       # `npm install prisma @prisma/client` and a migration have been run.
       # postgresql://buddhapets:${POSTGRES_PASSWORD}@postgres:5432/buddhapets_quiz
       NEXT_PUBLIC_SITE_URL: https://${DOMAIN}
+      # The browser talks to the Store API at this origin directly (same-site,
+      # so Woo's session cookie travels with it). Public by design — no keys.
+      NEXT_PUBLIC_CMS_URL: ${SITE_URL}
     networks:
       internal:
       edge:

@@ -9,6 +9,7 @@ import { RitualDiary } from "@/components/rituals/RitualDiary";
 import { Figure } from "@/components/ui/Figure";
 import { artByKey } from "@/components/ui/illustrations";
 import { Enso, Shield } from "@/components/ui/icons";
+import { Price } from "@/components/ui/Price";
 import { BUNDLE_DISCOUNT, formatPrice, productBySlug, tileClass } from "@/lib/content";
 import { productPhotos } from "@/lib/images";
 import { isPlanSlug, planList, plans, scoreBand } from "@/lib/quiz";
@@ -158,7 +159,7 @@ export default async function ZenPlanPage({
                   <h3 className="font-sans text-[14.5px] font-semibold transition-colors group-hover:text-violet">
                     {p.name}
                   </h3>
-                  <p className="font-display text-xl text-violet">{formatPrice(p.price)}</p>
+                  <Price zar={p.price} className="font-display text-xl text-violet" />
                 </div>
               </Link>
             ))}

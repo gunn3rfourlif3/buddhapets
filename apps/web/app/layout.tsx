@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Poppins } from "next/font/google";
 import "./globals.css";
+import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
+import { CartProvider } from "@/components/cart/CartProvider";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -37,7 +39,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${poppins.variable}`}>
-      <body>{children}</body>
+      <body>
+        <CurrencyProvider>
+          <CartProvider>{children}</CartProvider>
+        </CurrencyProvider>
+      </body>
     </html>
   );
 }

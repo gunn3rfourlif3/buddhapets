@@ -6,12 +6,13 @@ import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/Button";
 import { Figure } from "@/components/ui/Figure";
 import { ProductCard } from "@/components/ui/ProductCard";
+import { AddToCart } from "@/components/cart/AddToCart";
+import { Price } from "@/components/ui/Price";
 import { Stars } from "@/components/ui/Stars";
 import { artByKey } from "@/components/ui/illustrations";
 import { CheckDot, Shield } from "@/components/ui/icons";
 import {
   collectionBySlug,
-  formatPrice,
   productBySlug,
   products,
   productsInCollection,
@@ -100,14 +101,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               <span className="text-[13px] text-muted">[Reviews arrive after launch]</span>
             </div>
 
-            <p className="font-display text-[2rem] text-violet">{formatPrice(product.price)}</p>
+            <Price zar={product.price} className="font-display text-[2rem] text-violet" />
 
             <p className="max-w-[52ch] text-[15px] leading-[1.8] text-body">{product.description}</p>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Button href="/cart" variant="rose" className="px-8 py-3.5 text-[14.5px]">
-                Add to cart
-              </Button>
+              <AddToCart slug={product.slug} name={product.name} />
               <Button href="/rituals/build" variant="outline">
                 Build it into a ritual
               </Button>

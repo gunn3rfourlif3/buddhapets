@@ -1,12 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Figure } from "@/components/ui/Figure";
 import { artByKey } from "@/components/ui/illustrations";
 import { CheckDot, Shield } from "@/components/ui/icons";
+import { Price } from "@/components/ui/Price";
+import { useCart } from "@/components/cart/CartProvider";
+import { RITUAL_COUPON } from "@/lib/store";
 import {
   BUNDLE_DISCOUNT,
-  formatPrice,
   type Product,
   type RitualRole,
 } from "@/lib/content";
@@ -62,6 +65,35 @@ export function RitualBuilder({
 
   function pick(role: RitualRole, slug: string) {
     setSelection((prev) => ({ ...prev, [role]: prev[role] === slug ? undefined : slug }));
+  }
+
+  const { addBySlug, addCoupon, configured } = useCart();
+  const [adding, setAdding] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
+  const [addedRitual, setAddedRitual] = useState(false);
+
+  async function addRitual() {
+    setAdding(true);
+    setAddError(null);
+    setAddedRitual(false);
+    try {
+      // Sequentially, not in parallel: the Store API mutates one server-side
+      // cart, and concurrent writes race on its nonce.
+      for (const step of steps) {
+        const slug = selection[step.role];
+        if (slug) await addBySlug(slug);
+      }
+      // The saving quoted above is a Woo coupon. If it fails to apply, say so
+      // rather than letting the customer discover the difference at checkout.
+      await addCoupon(RITUAL_COUPON);
+      setAddedRitual(true);
+    } catch {
+      setAddError(
+        "We added what we could, but the ritual discount didn't apply. Check your basket before paying, or contact us and we'll sort it.",
+      );
+    } finally {
+      setAdding(false);
+    }
   }
 
   return (
@@ -120,7 +152,7 @@ export function RitualBuilder({
                       <p className="text-[14px] font-semibold">{product.name}</p>
                       <p className="text-[12.5px] leading-[1.55] text-muted">{product.blurb}</p>
                       <p className="mt-1 font-display text-[17px] text-violet">
-                        {formatPrice(product.price)}
+                        <Price zar={product.price} />
                       </p>
                     </div>
                   </button>
@@ -148,7 +180,7 @@ export function RitualBuilder({
                       <CheckDot size={18} />
                       <span className="grow text-[13.5px] text-[#4d4468]">{product.name}</span>
                       <span className="text-[13.5px] tabular-nums text-muted">
-                        {formatPrice(product.price)}
+                        <Price zar={product.price} />
                       </span>
                     </>
                   ) : (
@@ -170,10 +202,10 @@ export function RitualBuilder({
               <div className="flex flex-col gap-1">
                 <div className="flex items-baseline justify-between">
                   <span className="text-[13px] text-muted line-through tabular-nums">
-                    {formatPrice(full)}
+                    <Price zar={full} />
                   </span>
                   <span className="text-[12.5px] font-semibold text-rose-deep">
-                    save {formatPrice(saving)}
+                    save <Price zar={saving} />
                   </span>
                 </div>
                 <div className="flex items-baseline justify-between">
@@ -181,7 +213,7 @@ export function RitualBuilder({
                     Total
                   </span>
                   <span className="font-display text-[2rem] tabular-nums text-violet">
-                    {formatPrice(total)}
+                    <Price zar={total} />
                   </span>
                 </div>
               </div>
@@ -191,7 +223,7 @@ export function RitualBuilder({
                   So far
                 </span>
                 <span className="font-display text-[2rem] tabular-nums text-violet">
-                  {formatPrice(full)}
+                  <Price zar={full} />
                 </span>
               </div>
             )}
@@ -199,11 +231,31 @@ export function RitualBuilder({
 
           <button
             type="button"
-            disabled={!complete}
+            disabled={!complete || adding || !configured}
+            onClick={addRitual}
             className="rounded-full bg-rose px-7 py-3.5 text-[14.5px] font-semibold text-white shadow-rose transition-all hover:brightness-105 disabled:pointer-events-none disabled:opacity-40"
           >
-            {complete ? "Add ritual to cart" : `Choose ${steps.length - chosen.length} more`}
+            {!complete
+              ? `Choose ${steps.length - chosen.length} more`
+              : adding
+                ? "Adding…"
+                : "Add ritual to cart"}
           </button>
+
+          {addedRitual && !addError && (
+            <p aria-live="polite" className="text-center text-[13px] text-body">
+              Ritual added.{" "}
+              <Link href="/cart" className="font-semibold text-violet underline underline-offset-2">
+                View basket
+              </Link>
+            </p>
+          )}
+
+          {addError && (
+            <p aria-live="polite" className="text-center text-[13px] leading-[1.6] text-rose-deep">
+              {addError}
+            </p>
+          )}
 
           <p className="text-center text-[12.5px] leading-[1.6] text-muted">
             {complete

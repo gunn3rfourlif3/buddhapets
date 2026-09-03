@@ -8,6 +8,16 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# NEXT_PUBLIC_* values are inlined into the browser bundle by `next build`, so
+# they must be present HERE, not just in the runtime environment. Passing them
+# only through compose's `environment:` leaves the client with empty strings —
+# which shows up as a storefront whose cart silently refuses to work.
+ARG NEXT_PUBLIC_CMS_URL
+ARG NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_CMS_URL=$NEXT_PUBLIC_CMS_URL
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+
 RUN npm install && npm run build
 
 FROM node:22-alpine AS runner

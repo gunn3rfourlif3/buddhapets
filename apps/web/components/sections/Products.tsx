@@ -6,7 +6,8 @@ import { Figure } from "@/components/ui/Figure";
 import { Stars } from "@/components/ui/Stars";
 import { Bag } from "@/components/ui/icons";
 import { artByKey } from "@/components/ui/illustrations";
-import { featuredProducts, formatPrice } from "@/lib/content";
+import { Price } from "@/components/ui/Price";
+import { featuredProducts } from "@/lib/content";
 import { productPhotos } from "@/lib/images";
 
 
@@ -39,7 +40,7 @@ export function Products() {
                 <h3 className="font-sans text-[14.5px] font-semibold transition-colors group-hover:text-violet">
                   {p.name}
                 </h3>
-                <p className="font-display text-xl text-violet">{formatPrice(p.price)}</p>
+                <Price zar={p.price} className="font-display text-xl text-violet" />
                 <Stars />
               </div>
             </Link>

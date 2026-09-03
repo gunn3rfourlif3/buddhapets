@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { nav } from "@/lib/content";
-import { Bag, Logo, Wordmark } from "@/components/ui/icons";
+import { Logo, Wordmark } from "@/components/ui/icons";
 import { Button } from "@/components/ui/Button";
+import { CartLink } from "@/components/cart/CartLink";
+import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
 
 export function Header() {
   return (
@@ -21,9 +23,8 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link href="/cart" aria-label="Cart" className="transition-colors hover:text-violet">
-            <Bag size={20} />
-          </Link>
+          <CurrencySwitcher className="hidden sm:flex" />
+          <CartLink />
           <Button href="/shop" className="hidden sm:inline-flex">
             Shop Calm
           </Button>

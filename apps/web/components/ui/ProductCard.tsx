@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Figure } from "@/components/ui/Figure";
 import { artByKey } from "@/components/ui/illustrations";
 import { Stars } from "@/components/ui/Stars";
-import { formatPrice, type Product } from "@/lib/content";
+import { Price } from "@/components/ui/Price";
+import { type Product } from "@/lib/content";
 import { productPhotos } from "@/lib/images";
 
 /** The catalogue card. One definition, used by the shop, collections and plans. */
@@ -35,7 +36,7 @@ export function ProductCard({
         <h3 className="font-sans text-[14.5px] font-semibold transition-colors group-hover:text-violet">
           {product.name}
         </h3>
-        <p className="font-display text-xl text-violet">{formatPrice(product.price)}</p>
+        <Price zar={product.price} className="font-display text-xl text-violet" />
         {showStars && <Stars />}
       </div>
     </Link>

@@ -10,6 +10,8 @@
  * Never invent reviews, dates, addresses or customer names.
  */
 
+import { FALLBACK_RATES, formatIn } from "./currency";
+
 export type Tile = "lemon" | "sky" | "mint" | "rose" | "lavender" | "peach";
 
 /** Which illustration a product uses. One drawing per product. */
@@ -100,7 +102,7 @@ export const products: Product[] = [
   {
     slug: "cloud-nine-donut-bed",
     name: "Cloud Nine Donut Bed",
-    price: 49,
+    price: 799,
     blurb: "Deep-pressure comfort for thunder-night sleepers.",
     description:
       "A raised rim to rest a chin on and a sunken middle that holds a curled body — the shape does the reassuring. Machine washable, because the good beds are the ones that get used.",
@@ -110,12 +112,12 @@ export const products: Product[] = [
     tile: "lavender",
     badge: "Bestseller",
     featured: true,
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "quiet-hours-cave-bed",
     name: "Quiet Hours Cave Bed",
-    price: 55,
+    price: 899,
     blurb: "An enclosed den for pets who like to disappear.",
     description:
       "A hooded bed for the ones who take themselves under the duvet. The canopy cuts light and softens sound, which matters more than most people expect during fireworks season.",
@@ -123,12 +125,12 @@ export const products: Product[] = [
     role: "comfort",
     art: "cave-bed",
     tile: "sky",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "steady-hold-calming-vest",
     name: "Steady Hold Calming Vest",
-    price: 39,
+    price: 649,
     blurb: "Gentle constant pressure, like a long hug.",
     description:
       "Adjustable wrap that applies light, even pressure across the chest and flank. Put it on before the trigger, not during — it works best as part of a routine.",
@@ -136,13 +138,13 @@ export const products: Product[] = [
     role: "finishing",
     art: "vest",
     tile: "rose",
-    delivery: "5–10 business days · ships from the EU",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 
   {
     slug: "second-heartbeat-plush",
     name: "Second Heartbeat Plush",
-    price: 34,
+    price: 549,
     blurb: "A pulse to sleep against, for the ones who miss their litter.",
     description:
       "A soft companion with a gentle battery-powered pulse and a warmable insert. Puppies and newly adopted pets settle faster with something that breathes beside them — it is the closest a first night alone gets to not being alone.",
@@ -150,14 +152,14 @@ export const products: Product[] = [
     role: "comfort",
     art: "heartbeat",
     tile: "peach",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 
   // --- Slow Living ---
   {
     slug: "forage-and-flow-snuffle-mat",
     name: "Forage & Flow Snuffle Mat",
-    price: 29,
+    price: 479,
     blurb: "Turns dinner into a calming 20-minute treasure hunt.",
     description:
       "Dense fabric fronds hide kibble so a meal becomes nose work. The single cheapest change most people can make to an anxious dog's day, and the effect usually shows inside a week.",
@@ -166,12 +168,12 @@ export const products: Product[] = [
     art: "mat",
     tile: "lemon",
     featured: true,
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "still-water-lick-mat",
     name: "Still Water Lick Mat",
-    price: 19,
+    price: 299,
     blurb: "Licking lowers arousal — this makes it last.",
     description:
       "A textured mat for wet food, yoghurt or peanut butter. Repetitive licking is genuinely self-soothing, which makes this the easiest last task before bed.",
@@ -179,12 +181,12 @@ export const products: Product[] = [
     role: "finishing",
     art: "lick-mat",
     tile: "mint",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "meander-slow-feeder-bowl",
     name: "Meander Slow Feeder Bowl",
-    price: 24,
+    price: 399,
     blurb: "For the ones who inhale dinner.",
     description:
       "A maze-bottomed bowl that stretches a ninety-second meal into something closer to ten minutes. Gulping is arousal, not greed — slowing it down settles the mood as well as the stomach.",
@@ -192,13 +194,13 @@ export const products: Product[] = [
     role: "enrichment",
     art: "slow-feeder",
     tile: "peach",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 
   {
     slug: "long-hours-stuffable-chew",
     name: "Long Hours Stuffable Chew",
-    price: 22,
+    price: 349,
     blurb: "Stuff it, freeze it, hand it over as you leave.",
     description:
       "A hollow natural-rubber chew that holds wet food, yoghurt or peanut butter. Frozen, it turns the first anxious twenty minutes of being alone into a long, absorbing job — which is exactly the window that matters.",
@@ -206,14 +208,14 @@ export const products: Product[] = [
     role: "enrichment",
     art: "stuffable-chew",
     tile: "sky",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 
   // --- Zen Home ---
   {
     slug: "lotus-whisper-fountain",
     name: "Lotus Whisper Fountain",
-    price: 59,
+    price: 949,
     blurb: "A trickling water garden that keeps cats hydrated.",
     description:
       "Ceramic, near-silent, and filtered. Moving water encourages steady drinking, and in cats hydration and calm track together more closely than people expect.",
@@ -222,12 +224,12 @@ export const products: Product[] = [
     art: "fountain",
     tile: "mint",
     featured: true,
-    delivery: "5–10 business days · ships from the EU",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "stoneware-calm-bowl-set",
     name: "Stoneware Calm Bowl Set",
-    price: 44,
+    price: 699,
     blurb: "Weighted ceramic that doesn't skid or clatter.",
     description:
       "A heavy base means no chasing the bowl across the kitchen — less noise, less frustration, a quieter mealtime for everyone.",
@@ -235,12 +237,12 @@ export const products: Product[] = [
     role: "finishing",
     art: "bowl-set",
     tile: "sky",
-    delivery: "5–10 business days · ships from the EU",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "enso-garden-scratcher",
     name: "Enso Garden Scratcher",
-    price: 46,
+    price: 749,
     blurb: "A scratching post you won't want to hide.",
     description:
       "Recycled cardboard in a raked-sand pattern, on a solid base. Cats need to scratch; this gives them somewhere better than the sofa arm and looks like an object you chose.",
@@ -248,14 +250,14 @@ export const products: Product[] = [
     role: "enrichment",
     art: "scratcher",
     tile: "peach",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 
   // --- Together ---
   {
     slug: "zenchews-calming-treats",
     name: "ZenChews Calming Treats",
-    price: 24,
+    price: 399,
     blurb: "Hemp & L-theanine chews for storms, travel & vet days.",
     description:
       "Vet-approved natural ingredients, no sedatives. Give around forty minutes before the thing you're preparing for — they support a calm state rather than forcing one.",
@@ -265,12 +267,12 @@ export const products: Product[] = [
     tile: "rose",
     badge: "Bestseller",
     featured: true,
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "shared-calm-mat-set",
     name: "Shared Calm Mat Set",
-    price: 68,
+    price: 1099,
     blurb: "A meditation mat for you, a matching one for them.",
     description:
       "Two mats in the same weave — one human-sized, one pet-sized. The point is proximity: a pet settles faster beside a person who has also stopped moving.",
@@ -278,12 +280,12 @@ export const products: Product[] = [
     role: "comfort",
     art: "mat-set",
     tile: "lavender",
-    delivery: "5–10 business days · ships from the EU",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
   {
     slug: "evening-ritual-starter-kit",
     name: "Evening Ritual Starter Kit",
-    price: 52,
+    price: 849,
     blurb: "Lick mat, chews and a printed seven-night guide.",
     description:
       "Everything the first week of a wind-down needs, in one box. Built for people who'd rather be told what to do on night one than assemble it themselves.",
@@ -291,7 +293,7 @@ export const products: Product[] = [
     role: "enrichment",
     art: "starter-kit",
     tile: "peach",
-    delivery: "3–7 business days · ships from the US",
+    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
   },
 ];
 
@@ -317,8 +319,13 @@ export function productsForRole(role: RitualRole) {
   return products.filter((p) => p.role === role);
 }
 
+/**
+ * Prices are authored and charged in rand. Paystack and Payfast both settle in
+ * ZAR, so ZAR is the real currency of this store, not a display preference —
+ * the currency switcher converts for reading only (see lib/currency.ts).
+ */
 export function formatPrice(value: number) {
-  return `$${value.toFixed(2)}`;
+  return formatIn(value, "ZAR", FALLBACK_RATES);
 }
 
 /** The Ritual Builder's discount. One place, so the copy can't drift from the maths. */
@@ -441,7 +448,7 @@ export const faqGroups: { title: string; items: { q: string; a: string }[] }[] =
       },
       {
         q: "What currency are prices in?",
-        a: "Prices are shown in US dollars. Your bank converts at their rate, and may add a foreign transaction fee.",
+        a: "Prices are in South African rand (ZAR), and that is what you are charged at checkout. You can switch the display to another currency to get a sense of the cost, but that figure is an approximate conversion — your bank converts from rand at their own rate and may add a foreign transaction fee.",
       },
     ],
   },
