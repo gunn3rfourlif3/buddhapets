@@ -66,7 +66,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setCart(await work());
     } catch (e) {
-      setError(e instanceof StoreError ? e.message : "Something went wrong. Please try again.");
+      // Log the real thing. A customer gets a readable sentence; whoever is
+      // debugging gets the actual error, which is the whole point of a console.
+      console.error("[cart] operation failed:", key, e);
+      setError(
+        e instanceof StoreError
+          ? e.message
+          : `Something went wrong. Please try again. (${e instanceof Error ? e.message : String(e)})`,
+      );
       throw e;
     } finally {
       setPending((prev) => {

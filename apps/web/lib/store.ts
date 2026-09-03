@@ -142,7 +142,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     throw new StoreError(message, res.status);
   }
 
-  return (await res.json()) as T;
+  try {
+    return (await res.json()) as T;
+  } catch {
+    // A 200 whose body will not parse usually means something upstream (a
+    // security plugin, a cache, a proxy error page) answered instead of Woo.
+    throw new StoreError("The shop sent back a response we couldn't read.", res.status);
+  }
 }
 
 export function getCart(): Promise<Cart> {
@@ -178,6 +184,11 @@ export function removeItem(key: string): Promise<Cart> {
  */
 export async function productIdBySlug(slug: string): Promise<number> {
   const results = await request<StoreProduct[]>(`/products?slug=${encodeURIComponent(slug)}`);
+
+  if (!Array.isArray(results)) {
+    throw new StoreError("The shop's product list came back in an unexpected shape.", 500);
+  }
+
   const match = results.find((p) => p.slug === slug);
   if (!match) {
     throw new StoreError("This product isn't available to order yet.", 404);
