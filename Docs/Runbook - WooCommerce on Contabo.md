@@ -308,3 +308,51 @@ cd ~/buddhapets/infra && docker compose down     # never elsewhere
 Unused images pile up. The safe cleanup on a shared box is
 `docker image prune` (dangling only) — **never** `docker system prune -a`,
 which would delete images the other three stacks depend on.
+
+---
+
+## Pretty permalinks are not optional
+
+WordPress only serves the REST API at `/wp-json/...` when a permalink
+structure is set. With permalinks on **Plain**, every Store API URL returns the
+**site's homepage HTML with a 200 status** — which is the single most
+misleading failure mode in this stack:
+
+* `curl -I` reports `HTTP/2 200`, so the endpoint looks healthy.
+* No `Nonce` header is issued, so every cart write is rejected.
+* CORS headers appear on the `OPTIONS` preflight but not on the real
+  response, because `rest_pre_serve_request` never runs.
+* `/wp-json/...` paths pick up a spurious trailing-slash `301`, because
+  `redirect_canonical` is treating them as ordinary page URLs.
+* In the storefront the symptom is a cart that fails with a parse error, since
+  `response.json()` is handed HTML.
+
+Check and fix:
+
+```bash
+cd ~/buddhapets/infra
+docker compose run --rm wpcli wp option get permalink_structure   # empty = Plain = broken
+docker compose run --rm wpcli wp rewrite structure '/%postname%/' --hard
+docker compose run --rm wpcli wp rewrite flush --hard
+```
+
+Verify the API actually answers as JSON before touching anything else:
+
+```bash
+curl -s 'https://cms.buddhapets.co.za/wp-json/wc/store/v1/products/?slug=steady-hold-calming-vest' | head -c 120
+```
+
+An array starting `[{"id":` is healthy. `<!DOCTYPE html>` means the rewrite
+rules still are not in place. Re-check this after any WordPress reinstall,
+volume restore, or `.htaccess` change.
+
+## Storefront rebuilds
+
+`NEXT_PUBLIC_*` values are compiled into the browser bundle, so changing
+`SITE_URL` or `DOMAIN` in `.env` requires a **rebuild**, not a restart:
+
+```bash
+docker compose --profile storefront up -d --build web
+```
+
+A plain `restart` silently keeps the old baked-in values.
