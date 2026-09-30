@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Chat, Clock, Enso, Mail, Pin, Question, Shield } from "@/components/ui/icons";
@@ -41,22 +42,22 @@ export default function ContactPage() {
     <>
       <Header />
       <main className="bg-ivory">
-        <section className="bg-mist px-6 pb-28 pt-16 lg:px-gutter">
-          <div className="mx-auto flex max-w-[640px] flex-col items-center gap-4 text-center">
-            <Eyebrow icon={<Enso size={14} />}>Talk to us</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Ask us <span className="accent">anything</span>
-            </h1>
-            <p className="max-w-[46ch] text-[15px] leading-[1.8] text-body">
-              Whether something suits your pet, where an order is, or which ritual to start with —
-              a real person reads every one of these.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Talk to us"
+          icon={<Enso size={14} />}
+          title={<>Ask us <span className="accent-gold">anything</span></>}
+          width="max-w-[640px]"
+          className="px-6 pb-32 pt-20 lg:px-gutter"
+        >
+          Whether something suits your pet, where an order is, or which ritual to start with — a
+          real person reads every one of these.
+        </PageHero>
 
         {/* Pulled up over the band so the page opens on the answer, not the form. */}
-        <section className="px-6 lg:px-gutter">
-          <div className="mx-auto -mt-16 grid max-w-[1120px] gap-5 sm:grid-cols-3">
+        {/* relative z-10: the hero is positioned now, so without its own
+            stacking context this row paints UNDER the band and loses its icons. */}
+        <section className="relative z-10 px-6 lg:px-gutter">
+          <div className="mx-auto -mt-20 grid max-w-[1120px] gap-5 sm:grid-cols-3">
             {channels.map((c) => {
               const inner = (
                 <>

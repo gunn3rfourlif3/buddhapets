@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Bag, Shield } from "@/components/ui/icons";
@@ -18,22 +19,20 @@ export default function ShopPage() {
     <>
       <Header />
       <main>
-        <section className="bg-mist px-6 py-20 lg:px-gutter">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-4 text-center">
-            <Eyebrow icon={<Bag size={14} strokeWidth={2.4} />}>Zen Shop</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Everything we&rsquo;d put in our <span className="accent">own</span> home
-            </h1>
-            <p className="max-w-[52ch] text-[15px] leading-[1.8] text-body">
-              {products.length} hand-selected pieces. Nothing here is a novelty — each one earns its
-              place in a ritual, and every listing shows an honest delivery estimate before you buy.
-            </p>
-            <div className="mt-3 flex items-center gap-2.5 text-[13.5px] text-body">
-              <Shield size={18} className="text-champagne" />
+        <PageHero
+          eyebrow="Zen Shop"
+          icon={<Bag size={14} strokeWidth={2.4} />}
+          title={<>Everything we&rsquo;d put in our <span className="accent-gold">own</span> home</>}
+          footer={
+            <div className="mt-3 flex items-center gap-2.5 text-[13.5px] text-violet-mist">
+              <Shield size={18} className="text-champagne-light" />
               Covered by the 60-Day Happy Pet Guarantee.
             </div>
-          </div>
-        </section>
+          }
+        >
+          {products.length} hand-selected pieces. Nothing here is a novelty — each one earns its
+          place in a ritual, and every listing shows an honest delivery estimate before you buy.
+        </PageHero>
 
         {collections.map((collection) => {
           const items = productsInCollection(collection.slug);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { collectionArt } from "@/components/ui/illustrations";
@@ -20,18 +21,14 @@ export default function CollectionsPage() {
     <>
       <Header />
       <main>
-        <section className="bg-mist px-6 py-20 lg:px-gutter">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-4 text-center">
-            <Eyebrow icon={<Paw size={14} />}>Shop by ritual</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Four paths to a <span className="accent">calmer</span> home
-            </h1>
-            <p className="max-w-[52ch] text-[15px] leading-[1.8] text-body">
-              We group by what a product does in a routine, not by what shelf it would sit on in a
-              pet shop.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Shop by ritual"
+          icon={<Paw size={14} />}
+          title={<>Four paths to a <span className="accent-gold">calmer</span> home</>}
+        >
+          We group by what a product does in a routine, not by what shelf it would sit on in a pet
+          shop.
+        </PageHero>
 
         <section className="mx-auto flex max-w-[1440px] flex-col gap-16 px-6 py-section lg:px-gutter">
           {collections.map((collection, i) => {

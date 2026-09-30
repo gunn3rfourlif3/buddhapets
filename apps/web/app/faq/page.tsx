@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Chevron, Question, Shield } from "@/components/ui/icons";
@@ -17,18 +18,14 @@ export default function FaqPage() {
     <>
       <Header />
       <main>
-        <section className="bg-mist px-6 py-20 lg:px-gutter">
-          <div className="mx-auto flex max-w-[820px] flex-col items-center gap-4 text-center">
-            <Eyebrow icon={<Question size={14} />}>General &amp; popular</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Frequently asked <span className="accent">questions</span>
-            </h1>
-            <p className="max-w-[52ch] text-[15px] leading-[1.8] text-body">
-              Everything pet parents ask before their first order. If yours isn&rsquo;t here, ask us
-              — a real person answers.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow={<>General &amp; popular</>}
+          icon={<Question size={14} />}
+          title={<>Frequently asked <span className="accent-gold">questions</span></>}
+        >
+          Everything pet parents ask before their first order. If yours isn&rsquo;t here, ask us —
+          a real person answers.
+        </PageHero>
 
         <section className="mx-auto flex max-w-[820px] flex-col gap-14 px-6 py-section">
           {faqGroups.map((group) => (

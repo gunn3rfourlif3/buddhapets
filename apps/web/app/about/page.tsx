@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
@@ -34,18 +35,14 @@ export default function AboutPage() {
     <>
       <Header />
       <main>
-        <section className="bg-mist px-6 py-20 lg:px-gutter">
-          <div className="mx-auto flex max-w-[820px] flex-col items-center gap-5 text-center">
-            <Eyebrow icon={<Heart size={14} />}>Our story</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Bringing zen to <span className="accent">every den</span>
-            </h1>
-            <p className="max-w-[54ch] text-[16px] leading-[1.85] text-body">
-              A calm pet is a happy pet, and a happy pet makes for a peaceful home. That sentence is
-              the whole business — everything we stock has to earn its place against it.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Our story"
+          icon={<Heart size={14} />}
+          title={<>Bringing zen to <span className="accent-gold">every den</span></>}
+        >
+          A calm pet is a happy pet, and a happy pet makes for a peaceful home. That sentence is the
+          whole business — everything we stock has to earn its place against it.
+        </PageHero>
 
         {/* The why */}
         <section className="mx-auto flex max-w-[1440px] flex-col items-center gap-16 px-6 py-section lg:flex-row lg:gap-[5.625rem] lg:px-gutter">

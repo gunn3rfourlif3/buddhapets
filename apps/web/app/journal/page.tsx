@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { journalArt } from "@/components/ui/illustrations";
@@ -21,18 +22,14 @@ export default function JournalPage() {
     <>
       <Header />
       <main>
-        <section className="bg-mist px-6 py-20 lg:px-gutter">
-          <div className="mx-auto flex max-w-[820px] flex-col items-center gap-4 text-center">
-            <Eyebrow icon={<JournalIcon size={14} />}>The Journal</Eyebrow>
-            <h1 className="text-[clamp(2rem,4.5vw,3rem)] leading-[1.15]">
-              Articles &amp; <span className="accent">rituals</span>
-            </h1>
-            <p className="max-w-[52ch] text-[15px] leading-[1.8] text-body">
-              Practical writing on helping an anxious pet settle. Behavioural advice, honest about
-              what the evidence does and doesn&rsquo;t support.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="The Journal"
+          icon={<JournalIcon size={14} />}
+          title={<>Articles &amp; <span className="accent-gold">rituals</span></>}
+        >
+          Practical writing on helping an anxious pet settle. Behavioural advice, honest about what
+          the evidence does and doesn&rsquo;t support.
+        </PageHero>
 
         <section className="mx-auto grid max-w-[1440px] gap-6 px-6 py-section md:grid-cols-2 lg:grid-cols-3 lg:px-gutter">
           {journal.map((post) => {
