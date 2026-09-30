@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="BuddhaPets">
+  <title>BuddhaPets</title>
+  <g transform="translate(0,0) scale(4.26667)">
+    <circle cx="60" cy="60" r="48" fill="none" stroke="#de5493" stroke-width="8" stroke-linecap="round" stroke-dasharray="258 44" transform="rotate(-50 60 60)"/>
+    <g transform="translate(0,-1)">
+      <ellipse cx="33.5" cy="67" rx="6.5" ry="11.5" fill="#8a72c2"/>
+      <ellipse cx="62.5" cy="67" rx="6.5" ry="11.5" fill="#8a72c2"/>
+      <ellipse cx="48" cy="63" rx="16" ry="14.5" fill="#5b4397"/>
+      <ellipse cx="48" cy="70.5" rx="8.2" ry="6" fill="#c9bfe6"/>
+      <ellipse cx="48" cy="66.6" rx="2.3" ry="1.75" fill="#2e2153"/>
+      <path d="M39.2 61.3 q2.8 -3.4 5.6 0" stroke="#2e2153" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M51.2 61.3 q2.8 -3.4 5.6 0" stroke="#2e2153" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M62.5 58 L65 45 L73.5 52 Z" fill="#de5493"/>
+      <path d="M85.5 58 L83 45 L74.5 52 Z" fill="#de5493"/>
+      <ellipse cx="74" cy="63" rx="15.5" ry="14.5" fill="#de5493"/>
+      <ellipse cx="74" cy="70" rx="7.4" ry="5.4" fill="#fae4ee"/>
+      <path d="M71.9 66 h4.2 l-2.1 2.6 z" fill="#2e2153"/>
+      <path d="M65.2 61 q2.8 -3.4 5.6 0" stroke="#2e2153" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M77.2 61 q2.8 -3.4 5.6 0" stroke="#2e2153" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(52,27) scale(0.72)">
+      <path d="M12 21 C6 16.5 2 13.2 2 9 A5 5 0 0 1 12 6.6 A5 5 0 0 1 22 9 C22 13.2 18 16.5 12 21 Z" fill="#c9a24b"/>
+    </g>
+  </g>
+</svg>

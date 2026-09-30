@@ -107,15 +107,34 @@ export function CheckDot({ size = 18, className }: { size?: number; className?: 
 /** The stacked zen stones that form the logo's interior. */
 export function Logo({ size = 34, className }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 72 72" fill="none" className={className} aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 120 120" fill="none" className={className} aria-hidden="true">
       <circle
-        cx="36" cy="36" r="28"
-        stroke="var(--color-rose)" strokeWidth="5" strokeLinecap="round"
-        strokeDasharray="150 26" transform="rotate(-50 36 36)"
+        cx="60" cy="60" r="48"
+        stroke="var(--color-rose)" strokeWidth="8" strokeLinecap="round"
+        strokeDasharray="258 44" transform="rotate(-50 60 60)"
       />
-      <ellipse cx="36" cy="44" rx="10" ry="6" fill="var(--color-violet)" />
-      <ellipse cx="36" cy="35" rx="7.5" ry="4.5" fill="var(--color-violet-soft)" />
-      <ellipse cx="36" cy="27.5" rx="5" ry="3.2" fill="var(--color-violet-mist)" />
+      {/* The dog is drawn first so the cat overlaps it — that overlap is what
+          makes the two read as one pair rather than two icons side by side. */}
+      <g transform="translate(0,-1)">
+        <ellipse cx="33.5" cy="67" rx="6.5" ry="11.5" fill="var(--color-violet-soft)" />
+        <ellipse cx="62.5" cy="67" rx="6.5" ry="11.5" fill="var(--color-violet-soft)" />
+        <ellipse cx="48" cy="63" rx="16" ry="14.5" fill="var(--color-violet)" />
+        <ellipse cx="48" cy="70.5" rx="8.2" ry="6" fill="var(--color-violet-mist)" />
+        <ellipse cx="48" cy="66.6" rx="2.3" ry="1.75" fill="var(--color-ink)" />
+        <path d="M39.2 61.3 q2.8 -3.4 5.6 0" stroke="var(--color-ink)" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M51.2 61.3 q2.8 -3.4 5.6 0" stroke="var(--color-ink)" strokeWidth="2.2" strokeLinecap="round" />
+
+        <path d="M62.5 58 L65 45 L73.5 52 Z" fill="var(--color-rose)" />
+        <path d="M85.5 58 L83 45 L74.5 52 Z" fill="var(--color-rose)" />
+        <ellipse cx="74" cy="63" rx="15.5" ry="14.5" fill="var(--color-rose)" />
+        <ellipse cx="74" cy="70" rx="7.4" ry="5.4" fill="var(--color-blush)" />
+        <path d="M71.9 66 h4.2 l-2.1 2.6 z" fill="var(--color-ink)" />
+        <path d="M65.2 61 q2.8 -3.4 5.6 0" stroke="var(--color-ink)" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M77.2 61 q2.8 -3.4 5.6 0" stroke="var(--color-ink)" strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+      <g transform="translate(52,27) scale(0.72)">
+        <path d="M12 21 C6 16.5 2 13.2 2 9 A5 5 0 0 1 12 6.6 A5 5 0 0 1 22 9 C22 13.2 18 16.5 12 21 Z" fill="var(--color-champagne)" />
+      </g>
     </svg>
   );
 }
@@ -123,15 +142,35 @@ export function Logo({ size = 34, className }: { size?: number; className?: stri
 /** Logo variant for the midnight footer / hero. */
 export function LogoLight({ size = 30, className }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 72 72" fill="none" className={className} aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 120 120" fill="none" className={className} aria-hidden="true">
+      {/* Same drawing as <Logo>, re-toned for the midnight footer: the brand
+          violet is far too dark to read against it, so the fills lighten and
+          only the facial marks stay dark. */}
       <circle
-        cx="36" cy="36" r="28"
-        stroke="var(--color-rose)" strokeWidth="5" strokeLinecap="round"
-        strokeDasharray="150 26" transform="rotate(-50 36 36)"
+        cx="60" cy="60" r="48"
+        stroke="#e884b2" strokeWidth="8" strokeLinecap="round"
+        strokeDasharray="258 44" transform="rotate(-50 60 60)"
       />
-      <ellipse cx="36" cy="44" rx="10" ry="6" fill="#f6f4fb" />
-      <ellipse cx="36" cy="35" rx="7.5" ry="4.5" fill="#cfc5ea" />
-      <ellipse cx="36" cy="27.5" rx="5" ry="3.2" fill="#9d8cce" />
+      <g transform="translate(0,-1)">
+        <ellipse cx="33.5" cy="67" rx="6.5" ry="11.5" fill="#9d8cce" />
+        <ellipse cx="62.5" cy="67" rx="6.5" ry="11.5" fill="#9d8cce" />
+        <ellipse cx="48" cy="63" rx="16" ry="14.5" fill="#cfc5ea" />
+        <ellipse cx="48" cy="70.5" rx="8.2" ry="6" fill="#f6f4fb" />
+        <ellipse cx="48" cy="66.6" rx="2.3" ry="1.75" fill="#2e2153" />
+        <path d="M39.2 61.3 q2.8 -3.4 5.6 0" stroke="#2e2153" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M51.2 61.3 q2.8 -3.4 5.6 0" stroke="#2e2153" strokeWidth="2.2" strokeLinecap="round" />
+
+        <path d="M62.5 58 L65 45 L73.5 52 Z" fill="#e884b2" />
+        <path d="M85.5 58 L83 45 L74.5 52 Z" fill="#e884b2" />
+        <ellipse cx="74" cy="63" rx="15.5" ry="14.5" fill="#e884b2" />
+        <ellipse cx="74" cy="70" rx="7.4" ry="5.4" fill="#fae4ee" />
+        <path d="M71.9 66 h4.2 l-2.1 2.6 z" fill="#2e2153" />
+        <path d="M65.2 61 q2.8 -3.4 5.6 0" stroke="#2e2153" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M77.2 61 q2.8 -3.4 5.6 0" stroke="#2e2153" strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+      <g transform="translate(52,27) scale(0.72)">
+        <path d="M12 21 C6 16.5 2 13.2 2 9 A5 5 0 0 1 12 6.6 A5 5 0 0 1 22 9 C22 13.2 18 16.5 12 21 Z" fill="#e8c778" />
+      </g>
     </svg>
   );
 }

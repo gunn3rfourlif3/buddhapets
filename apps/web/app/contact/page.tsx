@@ -39,8 +39,15 @@ export default function ContactPage() {
               </h2>
               <div className="flex flex-col gap-2 text-[14.5px] text-[#4d4468]">
                 <p>hello@buddhapets.co.za</p>
-                <p className="text-muted">[Phone / WhatsApp]</p>
-                <p className="text-muted">[Business address]</p>
+                <p>
+                  <a
+                    href="https://wa.me/27814300804"
+                    className="font-semibold text-violet underline underline-offset-2"
+                  >
+                    WhatsApp 081 430 0804
+                  </a>
+                </p>
+                <p>32a Devonshire Bryanston Ave, Johannesburg</p>
               </div>
               <p className="text-[13px] leading-[1.7] text-muted">
                 We answer within one business day, usually sooner.

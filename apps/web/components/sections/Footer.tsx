@@ -61,8 +61,15 @@ export function Footer() {
           <div className="flex flex-col gap-3.5">
             <p className="text-[13px] font-semibold tracking-[0.5px] text-[#f6f4fb]">Contact</p>
             <div className="flex flex-col gap-2.5 text-[13px] text-[#f6f4fb]/60">
-              <p>[Business address]</p>
-              <p>[Phone / WhatsApp]</p>
+              <p>32a Devonshire Bryanston Ave, Johannesburg</p>
+              <p>
+                <a
+                  href="https://wa.me/27814300804"
+                  className="transition-colors hover:text-rose-light"
+                >
+                  WhatsApp 081 430 0804
+                </a>
+              </p>
               <p>hello@buddhapets.co.za</p>
             </div>
           </div>
