@@ -105,6 +105,41 @@ export function CheckDot({ size = 18, className }: { size?: number; className?: 
 }
 
 /** The stacked zen stones that form the logo's interior. */
+export function Chat({ size = 16, className, strokeWidth = 2 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} strokeWidth={strokeWidth}>
+      <path d="M20.5 11.7c0 4-3.8 7.2-8.5 7.2a9.7 9.7 0 0 1-2.9-.43L4.5 20l1.2-3.3A6.9 6.9 0 0 1 3.5 11.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z" />
+    </svg>
+  );
+}
+
+export function Mail({ size = 16, className, strokeWidth = 2 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} strokeWidth={strokeWidth}>
+      <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+      <path d="m3.8 7.2 7.1 5.2a2 2 0 0 0 2.2 0l7.1-5.2" />
+    </svg>
+  );
+}
+
+export function Pin({ size = 16, className, strokeWidth = 2 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} strokeWidth={strokeWidth}>
+      <path d="M12 21s6.5-5.6 6.5-10.3A6.5 6.5 0 0 0 5.5 10.7C5.5 15.4 12 21 12 21Z" />
+      <circle cx="12" cy="10.5" r="2.4" />
+    </svg>
+  );
+}
+
+export function Clock({ size = 16, className, strokeWidth = 2 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} strokeWidth={strokeWidth}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.3V12l3 1.8" />
+    </svg>
+  );
+}
+
 export function Logo({ size = 34, className }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 120 120" fill="none" className={className} aria-hidden="true">

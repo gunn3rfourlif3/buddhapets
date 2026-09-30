@@ -44,7 +44,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-[13px] font-semibold">
@@ -55,7 +55,7 @@ export function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="rounded-2xl border border-line bg-ivory px-4 py-3 text-sm outline-none transition-colors focus:border-violet"
+            className="rounded-2xl border border-line bg-mist px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-faint hover:border-line-strong focus:border-violet focus:bg-white"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -68,7 +68,7 @@ export function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            className="rounded-2xl border border-line bg-ivory px-4 py-3 text-sm outline-none transition-colors focus:border-violet"
+            className="rounded-2xl border border-line bg-mist px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-faint hover:border-line-strong focus:border-violet focus:bg-white"
           />
         </div>
       </div>
@@ -80,7 +80,7 @@ export function ContactForm() {
         <select
           id="topic"
           name="topic"
-          className="rounded-2xl border border-line bg-ivory px-4 py-3 text-sm outline-none transition-colors focus:border-violet"
+          className="rounded-2xl border border-line bg-mist px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-faint hover:border-line-strong focus:border-violet focus:bg-white"
         >
           <option>An order</option>
           <option>Which product suits my pet</option>
@@ -99,14 +99,14 @@ export function ContactForm() {
           required
           rows={6}
           placeholder="Tell us about your pet — breed, age, and what they do when they're unsettled. The more you tell us, the more useful our answer."
-          className="resize-none rounded-2xl border border-line bg-ivory px-4 py-3 text-sm leading-[1.7] outline-none transition-colors focus:border-violet"
+          className="resize-none rounded-2xl border border-line bg-mist px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-faint hover:border-line-strong focus:border-violet focus:bg-white leading-[1.7]"
         />
       </div>
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="self-start rounded-full bg-violet px-8 py-3.5 text-[14.5px] font-semibold text-white shadow-violet transition-all hover:bg-violet-deep disabled:opacity-60"
+        className="w-full rounded-full bg-violet px-8 py-3.5 text-[14.5px] font-semibold text-white shadow-violet transition-all duration-200 hover:-translate-y-0.5 hover:bg-violet-deep disabled:pointer-events-none disabled:opacity-60 sm:w-auto sm:self-start"
       >
         {status === "sending" ? "Sending…" : "Send message"}
       </button>
