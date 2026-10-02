@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { SleepingCat } from "@/components/ui/illustrations";
-import { Stars } from "@/components/ui/Stars";
-import { CheckDot, Heart } from "@/components/ui/icons";
+import { CheckDot, Heart, Shield } from "@/components/ui/icons";
 import { promises } from "@/lib/content";
 import { aboutPhoto } from "@/lib/images";
 
@@ -49,14 +49,26 @@ export function About() {
           className="rounded-card"
         />
 
-        {/* Review card — copy stays bracketed until real reviews exist. */}
+        {/*
+          This used to be a placeholder testimonial card with five filled stars.
+          Until a customer has actually said something, it states a promise we
+          can keep instead of borrowing words nobody has spoken.
+        */}
         <div className="absolute -bottom-7 -right-4 w-[254px] rounded-[18px] border border-line bg-white p-5 shadow-lifted lg:-right-8">
           <div className="flex flex-col gap-2">
-            <Stars size={14} />
-            <p className="text-[13px] italic leading-[1.65] text-[#4d4468]">
-              &ldquo;[Real customer quote goes here after launch]&rdquo;
+            <span className="flex size-9 items-center justify-center rounded-full bg-blush text-rose-deep">
+              <Shield size={16} />
+            </span>
+            <p className="text-[13px] leading-[1.65] text-[#4d4468]">
+              No reviews yet, and none invented. The first one here will come from
+              someone who bought it.
             </p>
-            <p className="text-xs font-semibold text-ink">[Customer name]</p>
+            <Link
+              href="/reviews"
+              className="text-xs font-semibold text-violet transition-opacity hover:opacity-70"
+            >
+              How reviews work &rarr;
+            </Link>
           </div>
         </div>
       </div>

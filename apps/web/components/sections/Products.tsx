@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Figure } from "@/components/ui/Figure";
-import { Stars } from "@/components/ui/Stars";
 import { Bag } from "@/components/ui/icons";
 import { artByKey } from "@/components/ui/illustrations";
 import { Price } from "@/components/ui/Price";
@@ -41,7 +40,6 @@ export function Products() {
                   {p.name}
                 </h3>
                 <Price zar={p.price} className="font-display text-xl text-violet" />
-                <Stars />
               </div>
             </Link>
           ))}

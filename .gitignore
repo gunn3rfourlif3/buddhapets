@@ -13,3 +13,6 @@ out/
 buddhapets/
 wp/wp-admin/
 wp/wp-includes/
+
+# tsc incremental cache
+*.tsbuildinfo

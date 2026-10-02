@@ -8,7 +8,7 @@ import { Figure } from "@/components/ui/Figure";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { AddToCart } from "@/components/cart/AddToCart";
 import { Price } from "@/components/ui/Price";
-import { Stars } from "@/components/ui/Stars";
+import { ProductReviews } from "@/components/sections/ProductReviews";
 import { artByKey } from "@/components/ui/illustrations";
 import { CheckDot, Shield } from "@/components/ui/icons";
 import {
@@ -96,10 +96,13 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
             <h1 className="text-[clamp(2rem,4vw,2.75rem)] leading-[1.15]">{product.name}</h1>
 
-            <div className="flex items-center gap-3">
-              <Stars size={14} />
-              <span className="text-[13px] text-muted">[Reviews arrive after launch]</span>
-            </div>
+            <a
+              href="#reviews"
+              className="inline-flex w-fit items-center gap-2 text-[13px] text-muted transition-colors hover:text-violet"
+            >
+              <span className="size-1.5 rounded-full bg-champagne" aria-hidden="true" />
+              No reviews yet &mdash; be the first
+            </a>
 
             <Price zar={product.price} className="font-display text-[2rem] text-violet" />
 
@@ -131,6 +134,10 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           </div>
         </section>
 
+        <section className="mx-auto max-w-[1040px] px-6 pb-section lg:px-gutter">
+          <ProductReviews slug={product.slug} name={product.name} />
+        </section>
+
         {related.length > 0 && (
           <section className="bg-mist px-6 py-section lg:px-gutter">
             <div className="mx-auto flex max-w-[1440px] flex-col gap-10">
@@ -143,7 +150,6 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                     key={p.slug}
                     product={p}
                     sizes="(max-width: 640px) 100vw, 33vw"
-                    showStars={false}
                   />
                 ))}
               </div>

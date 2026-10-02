@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Figure } from "@/components/ui/Figure";
 import { artByKey } from "@/components/ui/illustrations";
-import { Stars } from "@/components/ui/Stars";
 import { Price } from "@/components/ui/Price";
 import { type Product } from "@/lib/content";
 import { productPhotos } from "@/lib/images";
@@ -10,11 +9,9 @@ import { productPhotos } from "@/lib/images";
 export function ProductCard({
   product,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
-  showStars = true,
 }: {
   product: Product;
   sizes?: string;
-  showStars?: boolean;
 }) {
   return (
     <Link
@@ -37,7 +34,6 @@ export function ProductCard({
           {product.name}
         </h3>
         <Price zar={product.price} className="font-display text-xl text-violet" />
-        {showStars && <Stars />}
       </div>
     </Link>
   );

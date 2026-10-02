@@ -214,3 +214,34 @@ export function applyCoupon(code: string): Promise<Cart> {
 
 export const CHECKOUT_URL = `${CMS}/checkout`;
 export const IS_CONFIGURED = Boolean(CMS);
+
+/**
+ * Published reviews for one product.
+ *
+ * The Store API only ever returns reviews WordPress has approved, so nothing
+ * here is ours to write. Posting a review is not a Store API capability — a
+ * customer writes one through the comment form on the Woo product page, which
+ * is also where Woo enforces "verified owner". That is deliberate: it means a
+ * review on this site can only come from someone who actually bought the thing.
+ */
+export type StoreReview = {
+  id: number;
+  date_created: string;
+  formatted_date_created: string;
+  rating: number;
+  reviewer: string;
+  review: string;
+  verified: boolean;
+};
+
+export async function productReviews(productId: number): Promise<StoreReview[]> {
+  const results = await request<StoreReview[]>(
+    `/products/reviews?product_id=${productId}&per_page=20&order=desc&orderby=date_gmt`,
+  );
+  return Array.isArray(results) ? results : [];
+}
+
+/** Where a customer actually writes one: Woo's own review form, verified-owner gated. */
+export function reviewFormUrl(slug: string): string {
+  return `${CMS}/product/${slug}/#review_form`;
+}

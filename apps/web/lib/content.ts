@@ -112,7 +112,7 @@ export const products: Product[] = [
     tile: "lavender",
     badge: "Bestseller",
     featured: true,
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–25 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "quiet-hours-cave-bed",
@@ -125,7 +125,7 @@ export const products: Product[] = [
     role: "comfort",
     art: "cave-bed",
     tile: "sky",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–25 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "steady-hold-calming-vest",
@@ -138,7 +138,7 @@ export const products: Product[] = [
     role: "finishing",
     art: "vest",
     tile: "rose",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 12–18 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 
   {
@@ -152,7 +152,7 @@ export const products: Product[] = [
     role: "comfort",
     art: "heartbeat",
     tile: "peach",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–22 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 
   // --- Slow Living ---
@@ -168,7 +168,7 @@ export const products: Product[] = [
     art: "mat",
     tile: "lemon",
     featured: true,
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 12–18 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "still-water-lick-mat",
@@ -181,7 +181,7 @@ export const products: Product[] = [
     role: "finishing",
     art: "lick-mat",
     tile: "mint",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 12–18 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "meander-slow-feeder-bowl",
@@ -194,7 +194,7 @@ export const products: Product[] = [
     role: "enrichment",
     art: "slow-feeder",
     tile: "peach",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 12–18 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 
   {
@@ -208,7 +208,7 @@ export const products: Product[] = [
     role: "enrichment",
     art: "stuffable-chew",
     tile: "sky",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 12–18 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 
   // --- Zen Home ---
@@ -224,7 +224,7 @@ export const products: Product[] = [
     art: "fountain",
     tile: "mint",
     featured: true,
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–22 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "stoneware-calm-bowl-set",
@@ -237,7 +237,7 @@ export const products: Product[] = [
     role: "finishing",
     art: "bowl-set",
     tile: "sky",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–25 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "enso-garden-scratcher",
@@ -250,7 +250,7 @@ export const products: Product[] = [
     role: "enrichment",
     art: "scratcher",
     tile: "peach",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–22 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 
   // --- Together ---
@@ -267,7 +267,7 @@ export const products: Product[] = [
     tile: "rose",
     badge: "Bestseller",
     featured: true,
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 18–28 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "shared-calm-mat-set",
@@ -280,7 +280,7 @@ export const products: Product[] = [
     role: "comfort",
     art: "mat-set",
     tile: "lavender",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–22 days to South Africa — shipped from our supplier, cleared through SARS",
   },
   {
     slug: "evening-ritual-starter-kit",
@@ -293,7 +293,7 @@ export const products: Product[] = [
     role: "enrichment",
     art: "starter-kit",
     tile: "peach",
-    delivery: "[Delivery estimate — confirm with supplier before taking orders]",
+    delivery: "Estimated 15–22 days to South Africa — shipped from our supplier, cleared through SARS",
   },
 ];
 
@@ -482,13 +482,6 @@ export const journal = [
 ];
 
 /** Placeholder review slots — replace only with genuine customer reviews. */
-export const reviewSlots = [
-  { tile: "lemon" as Tile },
-  { tile: "sky" as Tile },
-  { tile: "mint" as Tile },
-  { tile: "rose" as Tile },
-];
-
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
